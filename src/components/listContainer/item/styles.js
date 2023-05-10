@@ -10,4 +10,8 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     textAlign: 'center',
   },
+  imgList: {
+    width: 100,
+    height: 100,
+  },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, Button, FlatList } from 'react-native';
+import { Modal, View, Text, Button, FlatList, Image } from 'react-native';
 
 import { styles } from './styles';
 
@@ -7,6 +7,7 @@ const ModalContainer = ({ isVisible, recipe, onPressReturn }) => {
   return (
     <Modal visible={isVisible}>
       <View style={styles.container}>
+        <Image source={{ uri: recipe.imgUrl }} style={styles.imgUrl} />
         <View>
           <Text style={styles.title}>Ingredientes</Text>
           <FlatList
