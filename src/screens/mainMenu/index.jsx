@@ -5,7 +5,7 @@ import { styles } from './styles';
 import { HeaderApp, ListContainer, ModalContainer } from '../../components/index';
 import recipes from '../../services/mockRecipes';
 
-const MainMenu = ({ userName }) => {
+const MainMenu = ({ userName, onLogOut }) => {
   const [isVisible, setVisible] = useState('false');
   const [recipeSelected, setRecipeSelected] = useState('');
 
@@ -20,7 +20,7 @@ const MainMenu = ({ userName }) => {
 
   return (
     <View>
-      <HeaderApp userName={userName} />
+      <HeaderApp userName={userName} onLogOut={onLogOut} />
       <View style={styles.container}>
         <Text style={styles.title}>Recetario</Text>
         <ListContainer items={recipes} onPressTouchable={SelectedItem} />

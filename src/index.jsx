@@ -27,6 +27,10 @@ export default function App() {
     setUserName(userName);
   };
 
-  if (userName) return <MainMenu userName={userName} />;
+  const OnLogout = () => {
+    setUserName(null);
+  };
+
+  if (userName) return <MainMenu userName={userName} onLogOut={OnLogout} />;
   return <Login onHandleLogin={onHandleLogin} />;
 }

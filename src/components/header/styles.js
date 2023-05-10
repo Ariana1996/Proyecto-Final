@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    flex: 1,
     fontSize: 20,
     color: 'white',
     fontFamily: 'Italic',
   },
-  button: {},
+  button: { flex: 2 },
 });
