@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { styles } from './styles';
-import { HeaderApp, ListContainer, ModalContainer } from '../../components/index';
+import { ListContainer, ModalContainer } from '../../components/index';
 import recipes from '../../services/mockRecipes';
 
-const MainMenu = ({ userName, onLogOut }) => {
+const MainMenu = () => {
   const [isVisible, setVisible] = useState('false');
   const [recipeSelected, setRecipeSelected] = useState('');
 
@@ -19,17 +19,10 @@ const MainMenu = ({ userName, onLogOut }) => {
   };
 
   return (
-    <View>
-      <HeaderApp userName={userName} onLogOut={onLogOut} />
-      <View style={styles.container}>
-        <Text style={styles.title}>Recetario</Text>
-        <ListContainer items={recipes} onPressTouchable={SelectedItem} />
-        <ModalContainer
-          recipe={recipeSelected}
-          isVisible={isVisible}
-          onPressReturn={onPressReturn}
-        />
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Recetario</Text>
+      <ListContainer items={recipes} onPressTouchable={SelectedItem} />
+      <ModalContainer recipe={recipeSelected} isVisible={isVisible} onPressReturn={onPressReturn} />
     </View>
   );
 };

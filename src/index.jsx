@@ -1,13 +1,11 @@
 import { useFonts } from 'expo-font';
-import { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { theme } from './constants';
-import { Login, MainMenu } from './screens/index';
+import Navigator from './navigation';
 import { styles } from './styles';
 
 export default function App() {
-  const [userName, setUserName] = useState(null);
   const [loaded] = useFonts({
     Bold: require('../assets/fonts/PTSans-Bold.ttf'),
     BoldItalic: require('../assets/fonts/PTSans-BoldItalic.ttf'),
@@ -23,14 +21,5 @@ export default function App() {
     );
   }
 
-  const onHandleLogin = (userName) => {
-    setUserName(userName);
-  };
-
-  const OnLogout = () => {
-    setUserName(null);
-  };
-
-  if (userName) return <MainMenu userName={userName} onLogOut={OnLogout} />;
-  return <Login onHandleLogin={onHandleLogin} />;
+  return <Navigator />;
 }
