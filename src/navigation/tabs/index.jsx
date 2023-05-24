@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import LoginNavigator from '../login';
@@ -11,9 +12,15 @@ const TabsNavigator = () => {
       <BottomTab.Screen
         name="Desloguearse"
         component={LoginNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarIcon: () => <Ionicons name="log-out-outline" /> }}
       />
-      <BottomTab.Screen name="Recetario" component={RecetarioNavigator} />
+      <BottomTab.Screen
+        name="Recetario"
+        component={RecetarioNavigator}
+        options={{
+          tabBarIcon: () => <Ionicons name="fast-food-outline" />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 };
