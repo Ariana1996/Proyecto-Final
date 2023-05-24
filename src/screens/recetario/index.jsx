@@ -5,7 +5,7 @@ import { styles } from './styles';
 import { ListContainer, ModalContainer } from '../../components/index';
 import recipes from '../../services/mockRecipes';
 
-const MainMenu = () => {
+const Recetario = () => {
   const [isVisible, setVisible] = useState('false');
   const [recipeSelected, setRecipeSelected] = useState('');
 
@@ -20,11 +20,14 @@ const MainMenu = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recetario</Text>
-      <ListContainer items={recipes} onPressTouchable={SelectedItem} />
+      <ListContainer
+        items={recipes}
+        onPressTouchable={SelectedItem}
+        options={{ headerShown: 'center' }}
+      />
       <ModalContainer recipe={recipeSelected} isVisible={isVisible} onPressReturn={onPressReturn} />
     </View>
   );
 };
 
-export default MainMenu;
+export default Recetario;

@@ -7,9 +7,7 @@ const Login = ({ navigation }) => {
   const [userName, setUserName] = useState(null);
 
   const onLogin = () => {
-    navigation.navigate('MainMenu', {
-      name: userName,
-    });
+    navigation.navigate('Recetario');
   };
 
   return (
