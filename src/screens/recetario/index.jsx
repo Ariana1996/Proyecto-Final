@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 import { ListContainer, ModalContainer } from '../../components/index';
-import recipes from '../../services/mockRecipes';
 
 const Recetario = () => {
+  const recipes = useSelector((state) => state.recipes.data);
+
   const [isVisible, setVisible] = useState('false');
   const [recipeSelected, setRecipeSelected] = useState('');
 
