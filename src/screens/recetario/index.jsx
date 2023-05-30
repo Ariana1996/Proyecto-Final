@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
 import { ListContainer, ModalContainer } from '../../components/index';
+import { selectRecipe } from '../../store/actions';
 
 const Recetario = () => {
+  const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes.data);
-
   const [isVisible, setVisible] = useState('false');
-  const [recipeSelected, setRecipeSelected] = useState('');
 
   const SelectedItem = (id) => {
-    setRecipeSelected(recipes.find((recipe) => recipe.id === id));
+    dispatch(selectRecipe(id));
     setVisible(!isVisible);
   };
 
@@ -27,7 +27,7 @@ const Recetario = () => {
         onPressTouchable={SelectedItem}
         options={{ headerShown: 'center' }}
       />
-      <ModalContainer recipe={recipeSelected} isVisible={isVisible} onPressReturn={onPressReturn} />
+      <ModalContainer isVisible={isVisible} onPressReturn={onPressReturn} />
     </View>
   );
 };

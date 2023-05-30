@@ -1,12 +1,24 @@
+/* eslint-disable no-case-declarations */
 import recipesMock from '../../services/mockRecipes';
+import { recipesTypes } from '../types/recipes.type';
 
 const initialState = {
   data: recipesMock,
-  selected: null,
+  selected: '',
 };
 
 const recipesReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case recipesTypes.SELECT_RECIPE:
+      const indexRecipe = state.data.findIndex((recipe) => recipe.id == action.recipeId);
+      if (indexRecipe === -1) return state;
+      return {
+        ...state,
+        selected: state.data[indexRecipe],
+      };
+    default:
+      return state;
+  }
 };
 
 export default recipesReducer;

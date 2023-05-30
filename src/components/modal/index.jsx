@@ -1,9 +1,12 @@
 import React from 'react';
 import { Modal, View, Text, Button, FlatList, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 
-const ModalContainer = ({ isVisible, recipe, onPressReturn }) => {
+const ModalContainer = ({ isVisible, onPressReturn }) => {
+  const recipe = useSelector((state) => state.recipes.selected);
+
   return (
     <Modal visible={isVisible}>
       <View style={styles.container}>
