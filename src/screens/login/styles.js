@@ -16,4 +16,5 @@ export const styles = StyleSheet.create({
     width: 200,
     textAlign: 'center',
   },
+  buttonMessage: { borderBottomColor: 'white', backgroundColor: 'white' },
 });

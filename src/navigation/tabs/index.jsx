@@ -21,6 +21,13 @@ const TabsNavigator = () => {
           tabBarIcon: () => <Ionicons name="fast-food-outline" />,
         }}
       />
+      <BottomTab.Screen
+        name="Favoritos"
+        component={RecetarioNavigator}
+        options={{
+          tabBarIcon: () => <Ionicons name="heart-outline" />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 };
