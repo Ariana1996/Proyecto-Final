@@ -16,6 +16,19 @@ const recipesReducer = (state = initialState, action) => {
         ...state,
         selected: state.data[indexRecipe],
       };
+    case recipesTypes.ADD_RECIPE:
+      const ids = state.data.map((recipe) => {
+        return recipe.id;
+      });
+      const max = Math.max(...ids);
+      const newRecipe = action.newRecipe;
+      newRecipe.id = max + 1;
+      newRecipe.imgUrl = 'https://assets.unileversolutions.com/recipes-v2/165292.jpg';
+      const updatedData = [...state.data, newRecipe];
+      return {
+        ...state,
+        data: updatedData,
+      };
     default:
       return state;
   }

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 
-const ModalContainer = ({ isVisible, onPressReturn }) => {
+const ModalDetail = ({ isVisible, onPressReturn }) => {
   const recipe = useSelector((state) => state.recipes.selected);
 
   return (
@@ -31,4 +31,4 @@ const ModalContainer = ({ isVisible, onPressReturn }) => {
   );
 };
 
-export default ModalContainer;
+export default ModalDetail;

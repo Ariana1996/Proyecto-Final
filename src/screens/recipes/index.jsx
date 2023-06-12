@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { styles } from './styles';
-import { ListContainer, ModalContainer } from '../../components/index';
+import { ListContainer, ModalDetail } from '../../components/index';
 import { selectRecipe } from '../../store/actions';
 
-const Recetario = () => {
+const Recipe = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes.data);
   const [isVisible, setVisible] = useState('false');
@@ -27,9 +27,9 @@ const Recetario = () => {
         onPressTouchable={SelectedItem}
         options={{ headerShown: 'center' }}
       />
-      <ModalContainer isVisible={isVisible} onPressReturn={onPressReturn} />
+      <ModalDetail isVisible={isVisible} onPressReturn={onPressReturn} />
     </View>
   );
 };
 
-export default Recetario;
+export default Recipe;

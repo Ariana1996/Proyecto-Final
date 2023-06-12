@@ -3,9 +3,9 @@ import { Button, Text, TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { styles } from './styles';
-import { login, register } from '../../store/actions';
+import { login, logout, register } from '../../store/actions';
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);

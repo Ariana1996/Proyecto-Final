@@ -1,6 +1,6 @@
 import { loginTypes } from '../types/login.type';
 
-const { LOGIN, REGISTER } = loginTypes;
+const { LOGIN, REGISTER, LOGOUT } = loginTypes;
 
 const initialState = {
   token: null,
@@ -13,6 +13,8 @@ const loginReducer = (state = initialState, action) => {
       return { ...state, token: action.token, userId: action.userId };
     case LOGIN:
       return { ...state, token: action.token, userId: action.userId };
+    case LOGOUT:
+      return { ...state, token: null, userId: null };
     default:
       return state;
   }
