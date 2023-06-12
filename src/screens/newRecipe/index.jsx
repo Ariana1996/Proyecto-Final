@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Button, FlatList, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, Text, TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { styles } from './styles';
+import { ImageSelector } from '../../components';
 import Input from '../../components/input';
 import ModalContainer from '../../components/modalContainer';
 import { theme } from '../../constants/theme';
@@ -14,6 +15,7 @@ const NewRecipe = () => {
   const [step, setStep] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const [textModal, setTextModal] = useState('');
+  const [image, setImage] = useState('');
   const [recipe, setRecipe] = useState({
     id: '',
     title: '',
@@ -49,13 +51,14 @@ const NewRecipe = () => {
     if (
       title.length === 0 ||
       newRecipe['steps'].length == 0 ||
-      newRecipe['ingredients'].length == 0
+      newRecipe['ingredients'].length == 0 ||
+      image == ''
     ) {
       setTextModal('Debe completar todos los datos');
       setIsVisible(true);
       return;
     }
-
+    newRecipe['imgUrl'] = image;
     newRecipe['title'] = title;
     dispatch(addRecipe(newRecipe));
     setTextModal('Receta agregada exitosamente');
@@ -67,59 +70,66 @@ const NewRecipe = () => {
     setIsVisible(!isVisible);
   };
 
+  const onImage = (imageUri) => {
+    setImage(imageUri);
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
-        <Text style={styles.title}> Nombre de la receta:</Text>
-        <TextInput
-          placeholder="Pizza"
-          style={styles.inputTitle}
-          value={title}
-          onChangeText={(val) => setTitle(val)}
-        />
+        <View>
+          <Text style={styles.title}> Nombre de la receta:</Text>
+          <TextInput
+            placeholder="Pizza"
+            style={styles.inputTitle}
+            value={title}
+            onChangeText={(val) => setTitle(val)}
+          />
+        </View>
+        <View>
+          <Text style={styles.title}> Ingredientes</Text>
+          <Input
+            placeholder="Tomate"
+            text={ingredient}
+            onChangeText={(val) => setIngredient(val)}
+            buttonTitle="Agregar"
+            buttonColor={theme.colors.primary}
+            onPressButton={AddIngredient}
+          />
+          <FlatList
+            renderItem={renderItem}
+            style={styles.listContainer}
+            data={recipe.ingredients}
+            keyExtractor={(item) => item}
+          />
+        </View>
+        <View>
+          <Text style={styles.title}> Pasos</Text>
+          <Input
+            placeholder="Agregar ingredientes y mezclar"
+            text={step}
+            onChangeText={(val) => setStep(val)}
+            buttonTitle="Agregar"
+            buttonColor={theme.colors.primary}
+            onPressButton={AddStep}
+          />
+          <FlatList
+            style={styles.listContainer}
+            renderItem={renderItem}
+            data={recipe.steps}
+            keyExtractor={(item) => item}
+          />
+        </View>
+        <View>
+          <Text style={styles.title}>Tomar foto de tu receta</Text>
+        </View>
+        <ImageSelector onImage={onImage} />
+        <View>
+          <Button title="Agregar receta" style={styles.buttonAdd} onPress={AddRecipe} />
+        </View>
+        <ModalContainer text={textModal} isVisible={isVisible} onConfirmButton={SetVisible} />
       </View>
-      <View>
-        <Text style={styles.title}> Ingredientes</Text>
-        <Input
-          placeholder="Tomate"
-          text={ingredient}
-          onChangeText={(val) => setIngredient(val)}
-          buttonTitle="Agregar"
-          buttonColor={theme.colors.primary}
-          onPressButton={AddIngredient}
-        />
-        <FlatList
-          renderItem={renderItem}
-          style={styles.listContainer}
-          data={recipe.ingredients}
-          keyExtractor={(item) => item}
-        />
-      </View>
-      <View>
-        <Text style={styles.title}> Pasos</Text>
-        <Input
-          placeholder="Agregar ingredientes y mezclar"
-          text={step}
-          onChangeText={(val) => setStep(val)}
-          buttonTitle="Agregar"
-          buttonColor={theme.colors.primary}
-          onPressButton={AddStep}
-        />
-        <FlatList
-          style={styles.listContainer}
-          renderItem={renderItem}
-          data={recipe.steps}
-          keyExtractor={(item) => item}
-        />
-      </View>
-      <View>
-        <Text style={styles.title}>Tomar foto de tu receta</Text>
-      </View>
-      <View>
-        <Button title="Agregar receta" style={styles.buttonAdd} onPress={AddRecipe} />
-      </View>
-      <ModalContainer text={textModal} isVisible={isVisible} onConfirmButton={SetVisible} />
-    </View>
+    </ScrollView>
   );
 };
 

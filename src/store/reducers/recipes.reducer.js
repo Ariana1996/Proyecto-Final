@@ -23,7 +23,6 @@ const recipesReducer = (state = initialState, action) => {
       const max = Math.max(...ids);
       const newRecipe = action.newRecipe;
       newRecipe.id = max + 1;
-      newRecipe.imgUrl = 'https://assets.unileversolutions.com/recipes-v2/165292.jpg';
       const updatedData = [...state.data, newRecipe];
       return {
         ...state,
