@@ -5,8 +5,8 @@ import LoginNavigator from './login';
 import TabNavigator from './tabs';
 
 const Navigation = () => {
-  //const userId = useSelector((state) => state.login.userId);
-  const userId = 'lala';
+  const userId = useSelector((state) => state.login.userId);
+
   return (
     <NavigationContainer>{userId ? <TabNavigator /> : <LoginNavigator />}</NavigationContainer>
   );
