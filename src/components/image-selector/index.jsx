@@ -10,7 +10,7 @@ export const ImageSelector = ({ onImage }) => {
 
   const verifyPermissions = async () => {
     const { status } = await requestCameraPermissionAsync();
-    console.log('ACAAA', status);
+
     if (status !== 'granted') {
       Alert.alert('Permisos denegados', 'Requerimos permisos para usar la cámara', [
         { text: 'OK' },

@@ -3,9 +3,18 @@ import { ActivityIndicator, View } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { theme } from './constants';
+import { init } from './db';
 import Navigator from './navigation';
 import store from './store/index';
 import { styles } from './styles';
+
+init()
+  .then(() => {
+    console.log('BD iniciada');
+  })
+  .catch((error) => {
+    console.log('Error al iniciar la bd;', error);
+  });
 
 export default function App() {
   const [loaded] = useFonts({

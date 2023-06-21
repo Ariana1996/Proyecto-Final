@@ -1,4 +1,5 @@
 export const recipesTypes = {
   SELECT_RECIPE: 'SELECT_RECIPE',
   ADD_RECIPE: 'ADD_RECIPE',
+  GET_RECIPES: 'GET_RECIPES',
 };

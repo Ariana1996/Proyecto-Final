@@ -1,9 +1,9 @@
 /* eslint-disable no-case-declarations */
-import recipesMock from '../../services/mockRecipes';
+import initialRecipes from '../../services/mockRecipes';
 import { recipesTypes } from '../types/recipes.type';
 
 const initialState = {
-  data: recipesMock,
+  data: initialRecipes,
   selected: '',
 };
 
@@ -16,17 +16,21 @@ const recipesReducer = (state = initialState, action) => {
         ...state,
         selected: state.data[indexRecipe],
       };
+
     case recipesTypes.ADD_RECIPE:
-      const ids = state.data.map((recipe) => {
-        return recipe.id;
-      });
-      const max = Math.max(...ids);
-      const newRecipe = action.newRecipe;
-      newRecipe.id = max + 1;
-      const updatedData = [...state.data, newRecipe];
+      const arrayRecipes = [];
+
+      arrayRecipes.push(action.recipe);
+
       return {
         ...state,
-        data: updatedData,
+        data: arrayRecipes,
+      };
+
+    case recipesTypes.GET_RECIPES:
+      return {
+        ...state,
+        data: action.recipes,
       };
     default:
       return state;
