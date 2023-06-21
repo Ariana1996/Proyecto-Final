@@ -5,9 +5,7 @@ import { View, Button, Text, Image, Alert } from 'react-native';
 import { styles } from './styles';
 import { theme } from '../../constants/theme';
 
-export const ImageSelector = ({ onImage }) => {
-  const [pickedUrl, setPickedUrl] = useState(null);
-
+export const ImageSelector = ({ onImage, pickedUrl }) => {
   const verifyPermissions = async () => {
     const { status } = await requestCameraPermissionAsync();
 
@@ -28,7 +26,6 @@ export const ImageSelector = ({ onImage }) => {
       allowsEditing: true,
     });
 
-    setPickedUrl(image.uri);
     onImage(image.uri);
   };
 

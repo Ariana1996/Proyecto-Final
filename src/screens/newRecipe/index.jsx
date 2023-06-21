@@ -52,7 +52,8 @@ const NewRecipe = () => {
       title.length === 0 ||
       newRecipe['steps'].length == 0 ||
       newRecipe['ingredients'].length == 0 ||
-      image == ''
+      image == '' ||
+      image == undefined
     ) {
       setTextModal('Debe completar todos los datos');
       setIsVisible(true);
@@ -62,6 +63,21 @@ const NewRecipe = () => {
     newRecipe['title'] = title;
     dispatch(addRecipe(newRecipe));
     setTextModal('Receta agregada exitosamente');
+    setIsVisible(true);
+    resetNewRecipe();
+  };
+
+  const resetNewRecipe = () => {
+    const recipe = {
+      id: '',
+      title: '',
+      steps: [],
+      ingredients: [],
+      imgUrl: '',
+    };
+    setTitle('');
+    setRecipe(recipe);
+    setImage('');
   };
 
   const renderItem = ({ item }) => <Text>{item}</Text>;
@@ -123,7 +139,7 @@ const NewRecipe = () => {
         <View>
           <Text style={styles.title}>Tomar foto de tu receta</Text>
         </View>
-        <ImageSelector onImage={onImage} />
+        <ImageSelector onImage={onImage} pickedUrl={image} />
         <View>
           <Button title="Agregar receta" style={styles.buttonAdd} onPress={AddRecipe} />
         </View>

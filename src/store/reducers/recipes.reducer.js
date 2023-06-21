@@ -20,6 +20,7 @@ const recipesReducer = (state = initialState, action) => {
     case recipesTypes.ADD_RECIPE:
       const arrayRecipes = [];
 
+      if (action.recipe == undefined) return state;
       arrayRecipes.push(action.recipe);
 
       return {
