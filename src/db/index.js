@@ -22,19 +22,11 @@ export const init = () => {
 };
 
 export const insertRecipe = (title, imgUrl, steps, ingredients) => {
-  const stepsString = steps.reduce((result, item) => {
-    return `${result}${item},`;
-  }, '');
-
-  const ingredientsString = ingredients.reduce((result, item) => {
-    return `${result}${item},`;
-  }, '');
-
   const promise = new Promise((resolve, reject) => {
     db.transaction((trx) => {
       trx.executeSql(
         'INSERT INTO RECIPES (title,imgUrl,steps,ingredients) VALUES (?,?,?,?)',
-        [title, imgUrl, stepsString, ingredientsString],
+        [title, imgUrl, steps.join(), ingredients.join()],
         (_, result) => {
           resolve(result);
         },
@@ -73,6 +65,12 @@ export const selectRecipes = () => {
         'SELECT * FROM RECIPES',
         [],
         (_, result) => {
+          result.rows._array.map(function (receta) {
+            receta['ingredients'] = receta['ingredients'].split(',');
+            receta['steps'] = receta['steps'].split(',');
+            return receta;
+          });
+
           resolve(result);
         },
         (_, error) => {
