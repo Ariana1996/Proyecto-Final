@@ -31,7 +31,12 @@ const recipesReducer = (state = initialState, action) => {
     case recipesTypes.GET_RECIPES:
       return {
         ...state,
-        data: action.recipes,
+        data: [...action.recipes],
+      };
+    case recipesTypes.SET_FAVOURITE:
+      return {
+        ...state,
+        selected: state.selected,
       };
     default:
       return state;

@@ -1,13 +1,14 @@
 const recipes = [
   {
-    id: '1',
+    id: 999,
     title: 'Ensalada',
     imgUrl: 'https://assets.unileversolutions.com/recipes-v2/165292.jpg',
     steps: ['Cortar las verduras', 'Mezclar', 'Condimentar'],
     ingredients: ['Tomate', 'Rúcula', 'Lechuga', 'Pepino', 'Perejil'],
+    isfavourite: false,
   },
   {
-    id: '2',
+    id: 998,
     title: 'Pizza',
     imgUrl:
       'https://i0.wp.com/cremigal.com/wp-content/uploads/2022/04/CREMIGAL-10-scaled.jpg?fit=960%2C640&ssl=1',
@@ -20,6 +21,7 @@ const recipes = [
       'Hornear hasta que el queso esté derretido',
     ],
     ingredients: ['Harina', 'Agua', 'Levadura', 'Aceite', 'Sal', 'Puré de tomate', 'Queso'],
+    isfavourite: false,
   },
 ];
 

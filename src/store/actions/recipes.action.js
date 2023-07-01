@@ -1,7 +1,7 @@
-import { selectRecipes, insertRecipe } from '../../db';
+import { selectRecipes, insertRecipe, setFavouriteRecipe } from '../../db';
 import { recipesTypes } from '../types';
 
-const { SELECT_RECIPE, ADD_RECIPE, GET_RECIPES } = recipesTypes;
+const { SELECT_RECIPE, ADD_RECIPE, GET_RECIPES, SET_FAVOURITE } = recipesTypes;
 
 export const selectRecipe = (id) => ({
   type: SELECT_RECIPE,
@@ -26,14 +26,22 @@ export const addRecipe = (recipe) => {
   };
 };
 
-export const getRecipes = () => {
+export const getRecipes = (favouritePage) => {
   return async (dispatch) => {
-    const result = await selectRecipes();
+    const result = await selectRecipes(favouritePage);
     const recipes = result.rows._array;
-
     dispatch({
       type: GET_RECIPES,
       recipes,
+    });
+  };
+};
+
+export const setFavourite = (idRecipe, isfavourite) => {
+  return async (dispatch) => {
+    await setFavouriteRecipe(idRecipe, isfavourite);
+    dispatch({
+      type: SET_FAVOURITE,
     });
   };
 };

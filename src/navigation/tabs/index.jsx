@@ -1,34 +1,38 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import AddRecipeNavigator from '../newRecipe';
-import RecipeNavigator from '../recipe';
+import { Recipe, NewRecipe } from '../../screens';
 
 const BottomTab = createBottomTabNavigator();
 
 const TabsNavigator = () => {
   return (
-    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+    <BottomTab.Navigator>
       <BottomTab.Screen
-        name="RecipesTab"
-        component={RecipeNavigator}
+        name="RecipeTab"
+        component={Recipe}
+        initialParams={{ favouritePage: false }}
         options={{
-          tabBarLabel: 'Recetario',
+          title: 'Recetas',
+          tabBarLabel: 'Recetas',
           tabBarIcon: () => <Ionicons name="fast-food-outline" />,
         }}
       />
       <BottomTab.Screen
         name="AddRecipeTab"
-        component={AddRecipeNavigator}
+        component={NewRecipe}
         options={{
+          title: 'Agregar receta',
           tabBarLabel: 'Agregar receta',
           tabBarIcon: () => <Ionicons name="add-circle-outline" />,
         }}
       />
       <BottomTab.Screen
-        name="FavouritesTab"
-        component={RecipeNavigator}
+        name="FavouriteTab"
+        component={Recipe}
+        initialParams={{ favouritePage: true }}
         options={{
+          title: 'Favoritos',
           tabBarLabel: 'Favoritos',
           tabBarIcon: () => <Ionicons name="heart-outline" />,
         }}

@@ -40,16 +40,17 @@ export const insertRecipe = (title, imgUrl, steps, ingredients) => {
   return promise;
 };
 
-export const selectFavouriteRecipe = (idRecipe) => {
+export const setFavouriteRecipe = (idRecipe, isfavourite) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((trx) => {
       trx.executeSql(
-        'UPDATE RECIPES SET isfavourite = true WHERE id = @idRecipe',
+        `UPDATE RECIPES SET isfavourite = ${!isfavourite} WHERE id = @idRecipe`,
         [idRecipe],
         (_, result) => {
           resolve(result);
         },
         (_, error) => {
+          console.log('error', error);
           reject(error);
         }
       );
@@ -58,11 +59,15 @@ export const selectFavouriteRecipe = (idRecipe) => {
   return promise;
 };
 
-export const selectRecipes = () => {
+export const selectRecipes = (favouritePage) => {
+  const query = favouritePage
+    ? 'SELECT * FROM RECIPES where isfavourite = true'
+    : 'SELECT * FROM RECIPES';
+
   const promise = new Promise((resolve, reject) => {
     db.transaction((trx) => {
       trx.executeSql(
-        'SELECT * FROM RECIPES',
+        query,
         [],
         (_, result) => {
           result.rows._array.map(function (receta) {
